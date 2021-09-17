@@ -6,7 +6,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+        <div class="sidebar-brand-text mx-2">Smart Cabinet</div>
     </a>
 
     <!-- Divider -->
@@ -107,6 +107,18 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
+
+    <li class="nav-item">
+        <a class="nav-link" href="monitoring.php">
+            <i class="far fa-eye"></i>
+            <span>monitoring</span></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="test.php">
+            <i class="far fa-eye"></i>
+            <span>test</span></a>
+    </li>
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
