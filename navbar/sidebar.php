@@ -117,7 +117,7 @@
     <li class="nav-item">
         <a class="nav-link" href="test.php">
             <i class="far fa-eye"></i>
-            <span>test</span></a>
+            <span>maintenance</span></a>
     </li>
 
     <!-- Sidebar Toggler (Sidebar) -->

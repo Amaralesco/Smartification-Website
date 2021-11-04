@@ -1,5 +1,17 @@
+<?php include("navbar/header.php"); ?>
 
-<?php include( "navbar/header.php"); ?>
+<?php
+  function removeday() { echo 'Day removed'; }
+
+  /* if (isset($_GET['remove'])) { return removeday(); } */
+?>
+
+<?php
+/* if (isset($_GET['solved_true']))
+    $pageSize = $_GET['solved_true'];
+ */
+?>
+
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -7,7 +19,7 @@
 
         <!-- Sidebar -->
         <?php include("navbar/sidebar.php"); ?>
-        
+
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -16,18 +28,18 @@
 
                 <!-- Topbar -->
                 <?php include("navbar/topbar.php"); ?>
-                
+
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Connection to the DataBase -->
-                    <?php include("DB/connect.php");?>
+                    <?php include("DB/connect.php"); ?>
 
                     <!-- Content Row -->
                     <div class="row">
 
 
-                        
+
                         <!-- State of the Equipment -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
@@ -36,46 +48,45 @@
                                         <div class="col mr-2">
                                             <h6 class="m-0 font-weight-bold text-primary">
                                                 <i class="fas fa-tachometer-alt fa-s"></i>
-                                                State of the Equipment    
-                                                
+                                                State of the Equipment
+
                                                 <br><br>
                                             </h6>
 
-                                                
-                                                    
-                                                
+
+
+
                                             <div class="h5 mb-0 font-weight-bold text-gray-700 bg-gray-200">
-                                                
-                                                
-                                                <?php 
-                                                    $query = 'SELECT activity FROM activities';
-                                                    $result = pg_query($con, $query) or die('Query failed: ' . pg_last_error());
-                
-                                                                                                        
-                                                    $arr_activities = pg_fetch_all($result);
 
-                                                    //----New Query
 
-                                                    $query = 'SELECT activity from MEASUREMENTS
+                                                <?php
+                                                $query = 'SELECT activity FROM activities';
+                                                $result = pg_query($con, $query) or die('Query failed: ' . pg_last_error());
+
+
+                                                $arr_activities = pg_fetch_all($result);
+
+                                                //----New Query
+
+                                                $query = 'SELECT activity from MEASUREMENTS
                                                                 ORDER BY time_stamp DESC
                                                                 LIMIT 1';
-                                                    $result = pg_query($con, $query) or die('Query failed: ' . pg_last_error());                                                                                                                             
-                                                    $arr_lastActivity = pg_fetch_array($result);
-                                                                                                        
-                                                    foreach($arr_activities as $activity){
+                                                $result = pg_query($con, $query) or die('Query failed: ' . pg_last_error());
+                                                $arr_lastActivity = pg_fetch_array($result);
 
-                                                        if($arr_lastActivity['activity'] == $activity['activity']){
-                                                            ?>
-                                                            <div class= 'text-gray-100 bg-gray-500'>
+                                                foreach ($arr_activities as $activity) {
+
+                                                    if ($arr_lastActivity['activity'] == $activity['activity']) {
+                                                ?>
+                                                        <div class='text-gray-100 bg-gray-500'>
                                                             <?php echo $activity['activity'] . "<br> <br>";
-                                                            ?> </div>
-                                                            <?php 
-                                                            continue;    
-                                                        }
-
-                                                        echo $activity['activity'] . "<br> <br>";
-                                                        
+                                                        ?> </div>
+                                                <?php
+                                                        continue;
                                                     }
+
+                                                    echo $activity['activity'] . "<br> <br>";
+                                                }
 
                                                 ?>
 
@@ -83,13 +94,13 @@
 
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Content Column -->     
+                        <!-- Content Column -->
                         <div class="col-lg-6 mb-4">
 
                             <!-- Illustrations -->
@@ -99,63 +110,63 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="text-center">
-                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                            src="img/undraw_Customer_survey_re_v9cj.svg" alt="...">
+                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_Customer_survey_re_v9cj.svg" alt="...">
                                     </div>
                                     <p>This page provides the user with the possibility to monitor his application</p>
-                                    <a target="_blank" rel="ugc" href="https://docs.google.com/forms/d/e/1FAIpQLSfm6HfKkzYcOiMGZXGJO0CfZ7mUJclj--3jBRu1cSAI8TmKRQ/viewform"> If you want, you can also use this form 
-                                    to send feedback to the developer &rarr;</a>
+                                    <a target="_blank" rel="ugc" href="https://docs.google.com/forms/d/e/1FAIpQLSfm6HfKkzYcOiMGZXGJO0CfZ7mUJclj--3jBRu1cSAI8TmKRQ/viewform"> If you want, you can also use this form
+                                        to send feedback to the developer &rarr;</a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                            
+
                     <!-- Content Row -->
                     <div class="row">
-                        <!-- Content Column -->     
+                        <!-- Content Column -->
                         <div class="col-lg-6 mb-4">
 
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Sensors Values</h6>
                                 </div>
-                            
 
-                                <?php 
-                                
-                                
 
-                                    $query = 'SELECT sensor FROM sensors';
-                                    $result = pg_query($con, $query) or die('Query failed: ' . pg_last_error());
+                                <?php
 
-                                    
-                                    
-                                    $arr_sensors = pg_fetch_all($result);
-                                    
-                                    //print_r($arr_sensors);
 
-                                    $query = 'SELECT DISTINCT ON (sensor) * FROM measurements
+
+                                $query = 'SELECT sensor FROM sensors';
+                                $result = pg_query($con, $query) or die('Query failed: ' . pg_last_error());
+
+
+
+                                $arr_sensors = pg_fetch_all($result);
+
+                                //print_r($arr_sensors);
+
+                                //Prints the most recent measurement
+                                $query = 'SELECT DISTINCT ON (sensor) * FROM measurements
                                     INNER JOIN automatic_monitoring
                                     ON automatic_monitoring.measurements_log_id = measurements.measurements_log_id
                                     ORDER BY  sensor, automatic_monitoring.time_stamp DESC';
 
-                                    $result = pg_query($con, $query) or die('Query failed: ' . pg_last_error());
+                                $result = pg_query($con, $query) or die('Query failed: ' . pg_last_error());
 
-                                    $arr_monitoring = pg_fetch_all($result);
-                                    $num = pg_num_rows($result);
+                                $arr_monitoring = pg_fetch_all($result);
+                                $num = pg_num_rows($result);
 
 
-                                    $query = 'SELECT DISTINCT ON (sensor) * FROM measurements
+                                $query = 'SELECT DISTINCT ON (sensor) * FROM measurements
                                             ORDER BY  sensor, time_stamp DESC';
 
-                                    $result = pg_query($con, $query) or die('Query failed: ' . pg_last_error());
+                                $result = pg_query($con, $query) or die('Query failed: ' . pg_last_error());
 
-                                    $arr_measurements = pg_fetch_all($result);
-                                    $num_measurements = pg_num_rows($result);
-                                    
+                                $arr_measurements = pg_fetch_all($result);
+                                $num_measurements = pg_num_rows($result);
 
-                                
+
+
                                 ?>
 
                                 <div class="card-body">
@@ -166,8 +177,9 @@
                                                     <th>Sensor</th>
                                                     <th>Value</th>
                                                     <th>Activity</th>
-                                                    <th>Time of Measure</th>                                                    
+                                                    <th>Time of Measure</th>
                                                     <th>Risk</th>
+                                                    <th>Maintenance</th>
                                                 </tr>
                                             </thead>
                                             <tfoot>
@@ -177,98 +189,193 @@
                                                     <th>Activity</th>
                                                     <th>Time of Measure</th>
                                                     <th>Risk</th>
+                                                    <th>Maintenance</th>
                                                 </tr>
                                             </tfoot>
                                             <tbody>
 
-                                            
-                                            
+
+
                                                 <?php
-                                                
-                                                foreach($arr_sensors as $index=>$sensor){
-                                                
+
+                                                foreach ($arr_sensors as $index => $sensor) {
+
                                                     $increment = 0;
-                                                    
-                                                    foreach ($arr_monitoring as $item){
-                                                                                                    
-                                                        
-                                                        if($item['sensor'] == $sensor['sensor'] && $item['solved'] == 'f'){// $item['sensor'] // It searches unsolved solutions as well
-                                                            
-                                                            if($item['risk'] == 0){echo "<tr class='table-success'>" ;}
-                                                            elseif($item['risk'] == 3){echo "<tr class='table-danger'>" ;}
-                                                            else {echo "<tr class='table-warning'>" ;}
-                                                            
-                                                            echo "<td>"; echo $item['sensor']; echo "</td>";
-                                                            echo "<td>"; echo $item['value']; echo "</td>";
-                                                            echo "<td>"; echo $item['activity']; echo "</td>";
-                                                            echo "<td>"; echo $item['time_stamp']; echo "</td>";
-                                                            echo "<td>"; echo $item['risk']; echo "</td>";                                                        
-                                                            
+
+                                                    //It iterates Maintenance, then monitoring, then sensors to make sure the website presents all sensors
+
+                                                    foreach ($arr_monitoring as $item) {
+
+
+                                                        if ($item['sensor'] == $sensor['sensor'] && $item['solved'] == 'f') { // $item['sensor'] // It searches unsolved solutions as well
+
+                                                            if ($item['risk'] == 0) {
+                                                                echo "<tr class='table-success'>";
+                                                            } elseif ($item['risk'] == 3) {
+                                                                echo "<tr class='table-danger'>";
+                                                            } else {
+                                                                echo "<tr class='table-warning'>";
+                                                            }
+
+                                                            echo "<td>";
+                                                            echo $item['sensor'];
+                                                            echo "</td>";
+                                                            echo "<td>";
+                                                            echo $item['value'];
+                                                            echo "</td>";
+                                                            echo "<td>";
+                                                            echo $item['activity'];
+                                                            echo "</td>";
+                                                            echo "<td>";
+                                                            echo $item['time_stamp'];
+                                                            echo "</td>";
+                                                            echo "<td>";
+                                                            echo $item['risk'];
+                                                            echo "</td>";
+                                                ?>
+                                                            <!-- Resolve Button -->
+                                                            <td>
+                                                                <a href="#" class="btn btn-success btn-icon-split btn-sm" data-toggle="modal" data-target="#MaintenanceModal">
+                                                                    <span class="icon text-white-50">
+                                                                        <i class="fas fa-check"></i>
+                                                                    </span>
+                                                                    <span class="text">Resolve</span>
+                                                                </a>
+                                                                <!-- Pop-UP -->
+                                                                <!-- Modal aka positioned over everything else in the document and remove scroll from the <body> so that modal content scrolls instead. -->
+                                                                <div class="modal fade" id="MaintenanceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Maintenance</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                Are you sure you want to mark this issue as solved?
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                 <button type="button" class="btn btn-primary" onClick="removeday(event);window.location.reload(); ">Save changes</button>
+                                                                                <!--<script>
+                                                                                    async function removeday() {
+                                                                                        //e.preventDefault();
+                                                                                        document.body.innerHTML += '<br>' + await (await fetch('?remove=1')).text();
+                                                                                    }
+                                                                                </script> -->
+
+                                                                                
+                                                                                        
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <?php
+
+                                                        } else {
+                                                            $increment++; //to notify if it didn't write that specific sensor
+
                                                         }
-                                                        else{
-                                                            $increment ++; //to notify if it didn't write that specific sensor
-                                                            
-                                                        }                                                       
                                                     }
-                                                    if ($increment == $num){ //it iterated among all the sensors, and found no common entries with monitoring
+                                                    //it iterated among all the sensors, and found no common entries with monitoring ||
+                                                    //OR, Very IMPORTANT, the most recent is Solved, so it displays only the measurement with a risk 0
+                                                    if ($increment == $num) { 
                                                         $increment = 0;
-                                                        foreach($arr_measurements as $measurements){
-                                                            if($measurements['sensor'] == $arr_sensors[$index]['sensor']){ //prints from measurements
-                                                                echo "<tr class='table-success'>" ;
-                                                                echo "<td>"; echo $arr_sensors[$index]['sensor']; echo "</td>";
-                                                                echo "<td>"; echo $measurements['value']; echo "</td>";
-                                                                echo "<td>"; echo $measurements['activity']; echo "</td>";
-                                                                echo "<td>"; echo $measurements['time_stamp']; echo "</td>";
-                                                                echo "<td>"; echo 0 ; /* risk */echo "</td>";
-                                                            }
-                                                            else{
-                                                                $increment ++; //to notify if it didn't find that specific sensor
-                                                                
+                                                        foreach ($arr_measurements as $measurements) {
+                                                            if ($measurements['sensor'] == $arr_sensors[$index]['sensor']) { //prints from measurements
+                                                                echo "<tr class='table-success'>";
+                                                                echo "<td>";
+                                                                echo $arr_sensors[$index]['sensor'];
+                                                                echo "</td>";
+                                                                echo "<td>";
+                                                                echo $measurements['value'];
+                                                                echo "</td>";
+                                                                echo "<td>";
+                                                                echo $measurements['activity'];
+                                                                echo "</td>";
+                                                                echo "<td>";
+                                                                echo $measurements['time_stamp'];
+                                                                echo "</td>";
+                                                                echo "<td>";
+                                                                echo 0; /* risk */
+                                                                echo "</td>";
+                                                            ?>
+                                                                <td>
+                                                                    <a href="#" class="btn btn-success btn-icon-split btn-sm disabled" aria-disabled="true" data-toggle="modal" data-target="#exampleModal">
+                                                                        <span class="icon text-white-50">
+                                                                            <i class="fas fa-check"></i>
+                                                                        </span>
+                                                                        <span class="text">Solved</span>
+                                                                    </a>
+
+                                                                </td>
+                                                            <?php
+                                                            } else {
+                                                                $increment++; //to notify if it didn't find that specific sensor
+
                                                             }
                                                         }
 
-                                                        if($increment == $num_measurements){ //it iterated among all the measurements, and found no common entries with sensors
-                                                            echo "<tr class='table-success'>" ;
-                                                            echo "<td>"; echo $arr_sensors[$index]['sensor']; echo "</td>";//prints from sensors aka no measurements yet
-                                                            echo "<td>"; /* echo $item['value'];  */echo "</td>";
-                                                            echo "<td>";/*  echo $item['activity']; */ echo "</td>";
-                                                            echo "<td>"; /* echo $item['time_stamp']; */ echo "</td>";
-                                                            echo "<td>"; /* echo $item['risk']; */ echo "</td>";
-                                                        }
+                                                        if ($increment == $num_measurements) { //it iterated among all the measurements, and found no common entries with sensors
+                                                            echo "<tr class='table-success'>";
+                                                            echo "<td>";
+                                                            echo $arr_sensors[$index]['sensor'];
+                                                            echo "</td>"; //prints from sensors aka no measurements yet
+                                                            echo "<td>"; /* echo $item['value'];  */
+                                                            echo "</td>";
+                                                            echo "<td>";/*  echo $item['activity']; */
+                                                            echo "</td>";
+                                                            echo "<td>"; /* echo $item['time_stamp']; */
+                                                            echo "</td>";
+                                                            echo "<td>"; /* echo $item['risk']; */
+                                                            echo "</td>";
 
-                                                    }                     
+                                                            ?>
+                                                            <td>
+                                                                <a href="#" class="btn btn-success btn-icon-split btn-sm disabled" aria-disabled="true">
+                                                                    <span class="icon text-white-50">
+                                                                        <i class="fas fa-check"></i>
+                                                                    </span>
+                                                                    <span class="text">Solved</span>
+                                                                </a>
+                                                            </td>
+                                                <?php
+                                                        }
+                                                    }
                                                     $increment = 0; //reset counter                                                                                                                                    
                                                 }
                                                 ?>
-                                            </tr>
-                                
+                                                </tr>
+
                                         </table>
-                                    </div>  
+                                    </div>
                                 </div>
-                            </div>  
+                            </div>
 
                         </div>
 
                         <!-- Earnings (Monthly) Card Example -->
                         <?php
 
-                            $query = "SELECT * FROM measurements
+                        $query = "SELECT * FROM measurements
                             WHERE sensor = 'Battery'
                             Order by time_stamp DESC
                             LIMIT 1";
 
-                            $result = pg_query($con, $query) or die('Query failed: ' . pg_last_error());
+                        $result = pg_query($con, $query) or die('Query failed: ' . pg_last_error());
 
-                            $arr_battery = pg_fetch_all($result);
-                            
-                            //print_r($arr_measurements);
+                        $arr_battery = pg_fetch_all($result);
 
-                        
-                        
+                        //print_r($arr_measurements);
+
+
+
                         ?>
 
 
-                        <div class="col-xl-3 col-md-6 mb-4 h-100" >                            
+                        <div class="col-xl-3 col-md-6 mb-4 h-100">
                             <div class="card border-left-info shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -278,14 +385,12 @@
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
                                                     <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                                        <?php echo $arr_battery[0]['value'];?>
+                                                        <?php echo $arr_battery[0]['value']; ?>
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="progress progress-sm mr-2">
-                                                        <div class="progress-bar bg-info" role="progressbar"
-                                                            style="width: <?php echo $arr_battery[0]['value'] ;?>%" aria-valuenow="100" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
+                                                        <div class="progress-bar bg-info" role="progressbar" style="width: <?php echo $arr_battery[0]['value']; ?>%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -297,7 +402,8 @@
                                 </div>
                             </div>
                         </div>
-
+                        <?php // include("MQTT/subscribe.php"); 
+                        ?>
                     </div>
                     <!-- /.Content Row -->
 
@@ -329,8 +435,7 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
