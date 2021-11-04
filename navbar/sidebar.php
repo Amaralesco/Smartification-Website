@@ -115,9 +115,15 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="test.php">
+        <a class="nav-link" href="maintenance.php">
             <i class="far fa-eye"></i>
             <span>maintenance</span></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="user_feedback.php">
+            <i class="far fa-eye"></i>
+            <span>User Feedback</span></a>
     </li>
 
     <!-- Sidebar Toggler (Sidebar) -->
