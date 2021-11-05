@@ -83,23 +83,11 @@ $count = 0;
                                             <input type="number" placeholder="Cost" name="cost" required style="width: 80% !important;">
                                             <br>
                                             <br>
-                                            <!-- <input type="password" placeholder="Password" name="password" required style="width: 80% !important;">
-                                            <br> -->
-
-                                            <!-- This one was better for aesthetics  -->
-
-                                            <!-- <div class="form-group">
-                                                <label for="Description">Description</label>
-                                                <textarea class="form-control" id="Description" rows="3"></textarea>
-                                            </div> -->
 
                                             <input type="text" placeholder="Description" name="description" required style="width: 80% !important;"> <br><br>
 
-                                            <!-- <input type="tel" id="phone" name="phone" placeholder="Phone number: 96XXXXXXX" pattern="[0-9]{9}" required"><br><br> -->
-                                            <!-- <b>Role&nbsp;&nbsp;</b>
-                                            
-                                            <br><br> -->
                                             <?php
+                                            //To prevent button from existing when there are no sensores requiring maintenance
                                             if($count == 0){
                                                 echo "No Sensor needs maintenance";
                                             }

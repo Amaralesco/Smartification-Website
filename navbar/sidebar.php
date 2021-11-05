@@ -111,13 +111,13 @@
     <li class="nav-item">
         <a class="nav-link" href="monitoring.php">
             <i class="far fa-eye"></i>
-            <span>monitoring</span></a>
+            <span>Monitoring</span></a>
     </li>
 
     <li class="nav-item">
         <a class="nav-link" href="maintenance.php">
             <i class="far fa-eye"></i>
-            <span>maintenance</span></a>
+            <span>Maintenance</span></a>
     </li>
 
     <li class="nav-item">

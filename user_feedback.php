@@ -1,5 +1,14 @@
+<!-- 
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
 
-<?php include( "navbar/header.php"); ?>
+
+<?php 
+    include("navbar/header.php");
+    include("DB/connect.php");
+?>
+
+
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -7,7 +16,7 @@
 
         <!-- Sidebar -->
         <?php include("navbar/sidebar.php"); ?>
-        
+
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -16,14 +25,75 @@
 
                 <!-- Topbar -->
                 <?php include("navbar/topbar.php"); ?>
-                
+
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
-                    
-                    
+                    <!-- http://www.jquery2dotnet.com/ -->
+
+                    <div class="row">
+                        <div class="col-s-6 col-md-3">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <h6 class="m-0 font-weight-bold text-primary">
+                                                <i class="glyphicon glyphicon-star"></i>
+                                                Rating
+
+                                                <br><br>
+                                            </h6>
+                                            <div class="well well-sm">
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-md-6 text-center">
+                                                        <?php
+                                                        $query = ' SELECT CAST(AVG(rating) AS DECIMAL(10,2))
+                                                                    FROM user_feedback_rating;';
+
+                                                        $result = pg_query($con, $query) or die('Query failed: ' . pg_last_error());
+                                                        $arr_avg_rating = pg_fetch_all($result);
+
+                                                        $query = '  SELECT COUNT(rating) 
+                                                                    FROM user_feedback_rating;';
+
+                                                        $result = pg_query($con, $query) or die('Query failed: ' . pg_last_error());
+                                                        $arr_count = pg_fetch_all($result);
+                                                            
+
+                                                        ?>
+
+                                                        <h1 class="rating-num">
+                                                            <?php echo $arr_avg_rating[0]['avg'] ?> <!-- Fetches first (and only row) of collumn avg -->
+                                                            <div class="rating">
+                                                                <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                                                            </div>
+                                                        </h1> 
+                                                        <!-- <div class="rating">
+                                                            <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">
+                                                            </span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">
+                                                            </span><span class="glyphicon glyphicon-star-empty"></span>
+                                                        </div> -->
+
+                                                        
+                                                        <div>
+                                                            <span class="glyphicon glyphicon-user"></span> From <?php echo $arr_count[0]['count'] ?>  users
+                                                        </div>
+                                                    </div>
+                                                    
+                                                        <!-- end row -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
 
                 </div>
                 <!-- /.container-fluid -->
@@ -53,8 +123,7 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
